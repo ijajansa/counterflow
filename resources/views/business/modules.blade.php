@@ -1,0 +1,10 @@
+<x-layouts.app title="Business modules">
+    <div class="mb-8"><p class="mb-2 text-sm font-semibold text-indigo-600">MAKE IT FIT</p><h1 class="page-heading">Business modules</h1><p class="muted mt-2">Choose the capabilities relevant to your {{ $business->type === 'retail' ? 'retail business' : $business->type }}.</p></div>
+    <div class="mb-6 rounded-2xl border border-indigo-100 bg-indigo-50 p-5 text-sm leading-6 text-indigo-950"><span class="font-semibold">Configure now, operate in future phases.</span> Module preferences and plan restrictions are enforced today. Checkout, inventory workflows, clothing variants, and restaurant operations will be implemented in later phases.</div>
+    <form method="POST" action="{{ route('business.modules.update') }}">@csrf @method('PUT')
+        <div class="grid gap-5 md:grid-cols-2">@foreach ($moduleLabels as $key => $label)@php($included = in_array($key, $planModules)) @php($relevant = in_array($key, $typeModules))
+            <label class="card flex gap-4 p-6 {{ $included && $relevant ? 'cursor-pointer hover:border-indigo-300' : 'opacity-70' }}"><input class="mt-1 h-5 w-5 shrink-0 rounded border-slate-300 accent-indigo-600" type="checkbox" name="modules[]" value="{{ $key }}" @checked(in_array($key, old('modules', $business->enabled_modules ?? []))) @disabled(! $included || ! $relevant)><span><span class="block font-semibold">{{ $label }}</span><span class="muted mt-2 block text-sm leading-6">{{ $moduleDescriptions[$key] ?? 'A capability for your business.' }}</span><span class="mt-4 inline-block text-xs font-semibold {{ $included && $relevant ? 'text-indigo-600' : 'text-slate-500' }}">{{ ! $relevant ? 'Not applicable to this business type' : ($included ? 'Included in your plan' : 'Requires a different plan') }}</span></span></label>
+        @endforeach</div>
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-4"><a class="text-sm font-semibold text-indigo-600" href="{{ route('business.subscription') }}">Review plan details →</a><button class="btn btn-primary" type="submit">Save module preferences</button></div>
+    </form>
+</x-layouts.app>

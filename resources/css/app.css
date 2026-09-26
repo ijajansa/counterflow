@@ -6,6 +6,36 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Inter', 'Segoe UI', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    body { @apply bg-[#f7f8fc] text-slate-800; }
+    button, a, input, select, textarea { @apply outline-offset-4 focus-visible:outline-2 focus-visible:outline-indigo-600; }
+    button { @apply cursor-pointer; }
+    [x-cloak] { display: none !important; }
+}
+
+@layer components {
+    .card { @apply rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_2px_8px_-4px_rgba(15,23,42,0.1)]; }
+    .btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+    .btn-primary { @apply bg-indigo-600 text-white shadow-sm hover:bg-indigo-700; }
+    .btn-secondary { @apply border border-slate-200 bg-white text-slate-700 hover:bg-slate-50; }
+    .btn-danger { @apply border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100; }
+    .input { @apply block w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100; }
+    .label { @apply mb-2 block text-sm font-medium text-slate-700; }
+    .badge { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium; }
+    .page-heading { @apply text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl; }
+    .eyebrow { @apply mb-3 text-xs font-semibold uppercase tracking-[.16em] text-indigo-600; }
+    .muted { @apply text-sm leading-6 text-slate-500; }
+    .table-wrap { @apply overflow-x-auto rounded-xl border border-slate-200/80 bg-white; }
+    .data-table { @apply w-full border-collapse text-left text-sm; }
+    .data-table thead { @apply bg-slate-50/80 text-xs text-slate-500; }
+    .data-table th { @apply whitespace-nowrap px-5 py-3.5 font-medium; }
+    .data-table td { @apply border-t border-slate-100 px-5 py-4; }
+    .data-table tbody tr { @apply hover:bg-slate-50/60; }
+    .nav-link { @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900; }
+    .nav-link-active { @apply bg-indigo-50 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700; }
+    .skip-link { @apply fixed -top-20 left-4 z-50 rounded-lg bg-indigo-600 px-5 py-3 text-white focus:top-4; }
 }
